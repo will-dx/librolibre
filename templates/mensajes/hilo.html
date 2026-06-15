@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Conversación - LibroLibre{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/mensajes.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="hero hero-mini">
+    <div class="hero-content">
+        <div class="hero-badge">✉️ Conversación</div>
+        <h1>{{ otro_usuario.nombre }}</h1>
+        <p>Mensajes sobre {{ libro.titulo|default:'intercambio' }}</p>
+    </div>
+</section>
+
+<div class="container-sm">
+    {% if libro %}
+    <div class="chat-sidebar reveal">
+        <h4>📖 Libro relacionado</h4>
+        <div style="display:flex;align-items:center;gap:1rem;">
+            {% if libro.foto %}
+            <img src="{{ libro.foto.url }}" alt="{{ libro.titulo }}"
+                 style="width:60px;height:60px;border-radius:var(--radius-sm);object-fit:cover;">
+            {% else %}
+            <div style="font-size:2.5rem;">📕</div>
+            {% endif %}
+            <div>
+                <p style="font-weight:700;">{{ libro.titulo }}</p>
+                <p style="font-size:0.82rem;color:var(--text-light);">{{ libro.autor|default:'Autor desconocido' }}</p>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <div style="background:white;border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;" class="reveal">
+        <div class="chat-header">
+            <div class="mensaje-avatar">{{ otro_usuario.nombre|first|upper }}</div>
+            <div>
+                <p style="font-weight:700;">{{ otro_usuario.nombre }}</p>
+                <p style="font-size:0.8rem;color:var(--text-light);">{{ otro_usuario.email }}</p>
+            </div>
+        </div>
+
+        <div class="chat-messages" id="chatMessages">
+            {% for msg in mensajes_hilo %}
+            <div class="chat-bubble {% if msg.remitente == request.user %}sent{% else %}received{% endif %}">
+                {{ msg.contenido|linebreaks }}
+                <span class="chat-time">{{ msg.fecha_envio|date:'d/m/Y H:i' }}</span>
+            </div>
+            {% empty %}
+            <div style="text-align:center;padding:2rem;color:var(--text-lighter);">
+                No hay mensajes en esta conversación.
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="chat-form">
+            <form method="POST">
+                {% csrf_token %}
+                {{ form.contenido }}
+                <button type="submit" class="btn btn-primary" style="white-space:nowrap;flex-shrink:0;">
+                    💬 Responder
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <div style="text-align:center;margin-top:1.5rem;">
+        <a href="{% url 'mensajes_inbox' %}" class="btn btn-outline btn-sm">← Volver a mensajes</a>
+    </div>
+</div>
+
+{% block extra_scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const chat = document.getElementById('chatMessages');
+    if (chat) {
+        chat.scrollTop = chat.scrollHeight;
+    }
+});
+</script>
+{% endblock %}
+{% endblock %}

@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}FAQ - LibroLibre{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/paginas.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="hero hero-mini">
+    <div class="hero-content">
+        <div class="hero-badge">❓ FAQ</div>
+        <h1>Preguntas frecuentes</h1>
+        <p>Resuelve tus dudas sobre LibroLibre.</p>
+    </div>
+</section>
+
+<div class="container">
+    <div class="faq-list">
+        {% for item in faq_items %}
+        <div class="faq-item reveal">
+            <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+                <span>{{ item.pregunta }}</span>
+                <span class="faq-toggle">+</span>
+            </button>
+            <div class="faq-answer">
+                <p>{{ item.respuesta }}</p>
+            </div>
+        </div>
+        {% empty %}
+        <div class="empty-state">
+            <div class="empty-state-icon">❓</div>
+            <h3>Preguntas frecuentes</h3>
+            <p><strong>¿Cómo puedo publicar un libro?</strong></p>
+            <p style="margin-bottom:1rem;">Solo regístrate con tu correo institucional, ve a "Publicar" y completa el formulario con el título, autor y una foto del libro.</p>
+
+            <p><strong>¿Cómo solicito un libro?</strong></p>
+            <p style="margin-bottom:1rem;">Explora el catálogo, encuentra el libro que necesitas y haz clic en "Solicitar". Se te mostrará la información de contacto del dueño.</p>
+
+            <p><strong>¿Hay algún costo?</strong></p>
+            <p style="margin-bottom:1rem;">No. LibroLibre es 100% gratuito. Solo préstamos y donaciones entre estudiantes.</p>
+
+            <p><strong>¿Puedo eliminar un libro que publiqué?</strong></p>
+            <p style="margin-bottom:1rem;">Sí. Ve a tu perfil, encuentra el libro y haz clic en "Eliminar".</p>
+
+            <p><strong>¿Cómo me comunico con el dueño de un libro?</strong></p>
+            <p>Al solicitar un libro, verás su correo electrónico. También puedes usar el sistema de mensajes internos para contactarlo directamente.</p>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div style="text-align:center;margin-top:2rem;">
+        <p style="color:var(--text-light);margin-bottom:1rem;">¿No encuentras tu respuesta?</p>
+        <a href="{% url 'pagina_contacto' %}" class="btn btn-primary">✉️ Contáctanos</a>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.faq-question').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const item = btn.parentElement;
+            const isOpen = item.classList.contains('open');
+            document.querySelectorAll('.faq-item.open').forEach(el => {
+                el.classList.remove('open');
+            });
+            if (!isOpen) item.classList.add('open');
+        });
+    });
+});
+</script>
+{% endblock %}

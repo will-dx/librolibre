@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Acerca de - LibroLibre{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/paginas.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="hero hero-mini">
+    <div class="hero-content">
+        <div class="hero-badge">📖 Sobre nosotros</div>
+        <h1>¿Qué es LibroLibre?</h1>
+        <p>Una comunidad estudiantil que impulsa el intercambio de conocimiento.</p>
+    </div>
+</section>
+
+<div class="about-full reveal">
+    <p>
+        <strong>LibroLibre</strong> nació como un proyecto universitario con una misión clara:
+        facilitar el intercambio, préstamo y donación de libros entre estudiantes de la misma institución.
+        Creemos que un libro que ya usaste puede ser el tesoro de otro estudiante.
+    </p>
+    <p>
+        Nuestra plataforma conecta a estudiantes que necesitan materiales académicos con aquellos
+        que ya los utilizaron y están dispuestos a compartirlos. Sin costos, sin intermediarios,
+        solo estudiantes ayudando a estudiantes.
+    </p>
+</div>
+
+<div class="about-grid">
+    <div class="about-card reveal">
+        <span class="about-icon">🎯</span>
+        <h3>Misión</h3>
+        <p>Crear una red de apoyo académico donde los estudiantes puedan acceder a libros de texto
+        y materiales de estudio sin barreras económicas.</p>
+    </div>
+    <div class="about-card reveal" style="animation-delay:0.1s;">
+        <span class="about-icon">🔭</span>
+        <h3>Visión</h3>
+        <p>Ser la plataforma de referencia para el intercambio de conocimiento universitario
+        en América Latina, fomentando la colaboración y la sostenibilidad.</p>
+    </div>
+    <div class="about-card reveal" style="animation-delay:0.2s;">
+        <span class="about-icon">💚</span>
+        <h3>Valores</h3>
+        <p>Solidaridad, sostenibilidad, comunidad, transparencia y amor por el conocimiento.
+        Creemos en la educación como motor de cambio social.</p>
+    </div>
+    <div class="about-card reveal" style="animation-delay:0.3s;">
+        <span class="about-icon">🌱</span>
+        <h3>Impacto</h3>
+        <p>Miles de estudiantes han encontrado libros gracias a la generosidad de sus compañeros.
+        Cada intercambio es un paso hacia una educación más accesible.</p>
+    </div>
+</div>
+
+<div class="container">
+    <h2 class="section-title reveal">Nuestra comunidad</h2>
+    <p class="section-subtitle reveal">El corazón de LibroLibre son los estudiantes</p>
+
+    <div class="stats-grid" style="border:none;padding:2rem 0;">
+        <div class="stat-item">
+            <div class="stat-number" data-count="{{ total_usuarios }}">{{ total_usuarios }}+</div>
+            <div class="stat-label">Estudiantes</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number" data-count="{{ total_libros }}">{{ total_libros }}+</div>
+            <div class="stat-label">Libros compartidos</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number" data-count="0">0+</div>
+            <div class="stat-label">Intercambios exitosos</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number" data-count="1">1+</div>
+            <div class="stat-label">Universidades</div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <h2 class="section-title reveal">Equipo</h2>
+    <p class="section-subtitle reveal">Detrás de LibroLibre</p>
+    <div class="team-grid">
+        <div class="team-card reveal">
+            <div class="team-avatar">👨‍💻</div>
+            <h4>Estudiantes</h4>
+            <p>Desarrolladores</p>
+        </div>
+        <div class="team-card reveal" style="animation-delay:0.1s;">
+            <div class="team-avatar">👩‍🏫</div>
+            <h4>Docentes</h4>
+            <p>Asesores académicos</p>
+        </div>
+        <div class="team-card reveal" style="animation-delay:0.2s;">
+            <div class="team-avatar">🤝</div>
+            <h4>Comunidad</h4>
+            <p>Usuarios y colaboradores</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

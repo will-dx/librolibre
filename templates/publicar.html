@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Publicar Libro - LibroLibre{% endblock %}
+
+{% block content %}
+<section class="hero hero-mini">
+    <div class="hero-content">
+        <div class="hero-badge">📖 Publicar</div>
+        <h1>Comparte un libro</h1>
+        <p>Ese libro que ya usaste puede ser justo lo que otro estudiante necesita.</p>
+    </div>
+</section>
+
+<div class="container-sm">
+    <div class="form-card">
+        <h2>Detalles del libro</h2>
+        <p class="section-subtitle">Completa la información para publicar tu libro</p>
+
+        <form method="POST" enctype="multipart/form-data" action="{% url 'publicar' %}">
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label for="titulo">Título del libro <span class="required">*</span></label>
+                <input type="text" id="titulo" name="titulo"
+                       placeholder="Ej: Cálculo Diferencial" required
+                       autofocus>
+            </div>
+
+            <div class="form-group">
+                <label for="autor">Autor</label>
+                <input type="text" id="autor" name="autor"
+                       placeholder="Ej: Juan Pérez López">
+                <div class="field-help">Opcional, pero ayuda a encontrar el libro</div>
+            </div>
+
+            <div class="form-group">
+                <label for="estado">Estado del libro</label>
+                <select id="estado" name="estado">
+                    <option value="disponible">✅ Disponible — Lo presto o regalo</option>
+                    <option value="prestado">📌 Prestado — Ya está con alguien más</option>
+                    <option value="donado">🎁 Donado — Ya fue donado</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="foto">Foto del libro</label>
+                <div class="file-input-wrapper">
+                    <input type="file" id="foto" name="foto" accept="image/*">
+                    <span class="file-name"></span>
+                </div>
+                <div class="field-help">Sube una foto para que otros reconozcan el libro</div>
+                <img class="file-preview" style="display:none;margin-top:0.75rem;max-height:200px;border-radius:8px;object-fit:cover;width:auto;">
+            </div>
+
+            <button type="submit" class="btn btn-accent btn-lg btn-full mt-3">
+                📤 Publicar Libro
+            </button>
+
+            <p style="text-align:center;margin-top:1rem;font-size:0.78rem;color:var(--text-lighter);">
+                Al publicar aceptas compartir tu información de contacto con quienes soliciten el libro.
+            </p>
+        </form>
+    </div>
+</div>
+{% endblock %}

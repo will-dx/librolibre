@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ materia.nombre }} - LibroLibre{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/materias.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="hero hero-mini">
+    <div class="hero-content">
+        <div class="hero-badge">{{ materia.icono }} {{ materia.nombre }}</div>
+        <h1>Libros de {{ materia.nombre }}</h1>
+        <p>{{ materia.descripcion|default:'Explora los libros disponibles de esta materia.' }}</p>
+        <div class="hero-buttons">
+            <a href="{% url 'materias_lista' %}" class="btn btn-outline btn-sm">← Todas las materias</a>
+        </div>
+    </div>
+</section>
+
+<div class="container">
+    {% if libros %}
+    <div class="book-grid">
+        {% for libro in libros %}
+        <div class="book-card" data-status="{{ libro.estado|lower }}">
+            <div class="book-image">
+                {% if libro.foto %}
+                <img src="{{ libro.foto.url }}" alt="{{ libro.titulo }}">
+                {% else %}
+                📕
+                {% endif %}
+                <div class="book-image-overlay"></div>
+            </div>
+            <div class="book-info">
+                <h3 class="book-title">{{ libro.titulo }}</h3>
+                <p class="book-author">✍️ {{ libro.autor|default:"Autor desconocido" }}</p>
+                <div class="book-meta">
+                    <span class="book-status status-{{ libro.estado|lower }}">
+                        {{ libro.get_estado_display }}
+                    </span>
+                    <a href="{% url 'solicitar' libro.id %}" class="btn btn-primary btn-sm">📩 Solicitar</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="empty-state">
+        <div class="empty-state-icon">📭</div>
+        <h3>No hay libros en {{ materia.nombre }}</h3>
+        <p>Aún no se han publicado libros en esta materia.</p>
+        <a href="{% url 'publicar' %}" class="btn btn-primary">📖 Publicar un libro</a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

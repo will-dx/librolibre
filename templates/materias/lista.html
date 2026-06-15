@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Materias - LibroLibre{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/materias.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="hero hero-mini">
+    <div class="hero-content">
+        <div class="hero-badge">📚 Materias</div>
+        <h1>Explora por materia</h1>
+        <p>Encuentra libros de tu carrera filtrados por materia académica.</p>
+    </div>
+</section>
+
+<div class="container">
+    <div class="search-wrapper reveal">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="searchMaterias" placeholder="Buscar materia..." autocomplete="off">
+    </div>
+
+    <div class="materias-grid">
+        {% for materia in materias %}
+        <a href="{% url 'materias_libros' materia.slug %}" class="materia-card reveal"
+           style="animation-delay:{{ forloop.counter0|divisibleby:10|yesno:'0.0,' }}{{ forloop.counter|add:'-1'|stringformat:'02d' }}s;">
+            <span class="materia-icon">{{ materia.icono }}</span>
+            <h3>{{ materia.nombre }}</h3>
+            <p>{{ materia.descripcion|default:'Explora libros de esta materia.' }}</p>
+            <span class="materia-count">
+                📖 {{ materia.total_libros }} libro{{ materia.total_libros|pluralize:'s' }}
+            </span>
+        </a>
+        {% empty %}
+        <div class="empty-state book-grid-empty" style="grid-column:1/-1;">
+            <div class="empty-state-icon">📭</div>
+            <h3>No hay materias registradas</h3>
+            <p>Las materias aparecerán aquí cuando los administradores las agreguen.</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const input = document.getElementById('searchMaterias');
+    if (!input) return;
+    input.addEventListener('input', (e) => {
+        const q = e.target.value.toLowerCase().trim();
+        document.querySelectorAll('.materia-card').forEach(card => {
+            const name = card.querySelector('h3').textContent.toLowerCase();
+            const desc = card.querySelector('p').textContent.toLowerCase();
+            card.style.display = (!q || name.includes(q) || desc.includes(q)) ? 'block' : 'none';
+        });
+    });
+});
+</script>
+{% endblock %}

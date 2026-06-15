@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Mensajes - LibroLibre{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/mensajes.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="hero hero-mini">
+    <div class="hero-content">
+        <div class="hero-badge">✉️ Mensajes</div>
+        <h1>Bandeja de entrada</h1>
+        <p>Comunícate con otros estudiantes para coordinar intercambios.</p>
+        <div class="hero-buttons">
+            <a href="{% url 'mensajes_enviar' %}" class="btn btn-accent btn-sm">✏️ Nuevo mensaje</a>
+        </div>
+    </div>
+</section>
+
+<div class="container">
+    <div class="mensajes-tabs">
+        <a href="{% url 'mensajes_inbox' %}" class="mensajes-tab active">
+            📥 Recibidos
+            {% if no_leidos %}<span class="badge">{{ no_leidos }}</span>{% endif %}
+        </a>
+        <a href="{% url 'mensajes_enviados' %}" class="mensajes-tab">📤 Enviados</a>
+    </div>
+
+    {% if mensajes %}
+    <div class="mensajes-lista">
+        {% for msg in mensajes %}
+        <a href="{% url 'mensajes_hilo' msg.id %}" class="mensaje-item {% if not msg.leido %}no-leido{% endif %} reveal">
+            <div class="mensaje-avatar">
+                {{ msg.remitente.nombre|first|upper }}
+            </div>
+            <div class="mensaje-body">
+                <div class="mensaje-header-info">
+                    <span class="mensaje-remitente">{{ msg.remitente.nombre }}</span>
+                    <span class="mensaje-fecha">{{ msg.fecha_envio|date:'d/m/Y H:i' }}</span>
+                </div>
+                {% if msg.libro %}
+                <div class="mensaje-libro-ref">📖 {{ msg.libro.titulo }}</div>
+                {% endif %}
+                <div class="mensaje-preview">{{ msg.contenido|truncatechars:100 }}</div>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="empty-state">
+        <div class="empty-state-icon">📭</div>
+        <h3>Bandeja vacía</h3>
+        <p>No tienes mensajes recibidos. Cuando alguien te envíe un mensaje aparecerá aquí.</p>
+        <a href="{% url 'catalogo' %}" class="btn btn-primary">📚 Explorar catálogo</a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

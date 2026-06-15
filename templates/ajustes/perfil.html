@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Ajustes - LibroLibre{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/ajustes.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="hero hero-mini">
+    <div class="hero-content">
+        <div class="hero-badge">⚙️ Ajustes</div>
+        <h1>Editar perfil</h1>
+        <p>Actualiza tu información personal.</p>
+    </div>
+</section>
+
+<div class="container">
+    <div class="ajustes-nav">
+        <a href="{% url 'ajustes_perfil' %}" class="active">👤 Perfil</a>
+        <a href="{% url 'ajustes_password' %}">🔒 Contraseña</a>
+    </div>
+
+    <div class="ajustes-card">
+        <h2>Información personal</h2>
+        <p class="section-subtitle">Actualiza tu nombre y correo institucional</p>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            {% if form.non_field_errors %}
+            <div class="toast toast-error" style="animation:none;margin-bottom:1rem;pointer-events:auto;">
+                <span class="toast-icon">✗</span>
+                <span>{{ form.non_field_errors.0 }}</span>
+            </div>
+            {% endif %}
+
+            <div class="form-group">
+                <label for="{{ form.nombre.id_for_label }}">{{ form.nombre.label }}</label>
+                {{ form.nombre }}
+                {% if form.nombre.errors %}
+                <div class="field-help" style="color:var(--accent);">{{ form.nombre.errors.0 }}</div>
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.email.id_for_label }}">{{ form.email.label }}</label>
+                {{ form.email }}
+                {% if form.email.errors %}
+                <div class="field-help" style="color:var(--accent);">{{ form.email.errors.0 }}</div>
+                {% endif %}
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-lg btn-full">
+                💾 Guardar cambios
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}

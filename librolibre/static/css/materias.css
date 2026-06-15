@@ -1,0 +1,99 @@
+.materias-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.materia-card {
+    background: var(--bg-card);
+    border-radius: var(--radius);
+    padding: 2rem 1.5rem;
+    text-align: center;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    border: 1px solid rgba(108, 92, 231, 0.04);
+    animation: fadeInUp 0.5s ease both;
+    text-decoration: none;
+    color: var(--text);
+    display: block;
+    position: relative;
+    overflow: hidden;
+}
+
+.materia-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+    opacity: 0;
+    transition: var(--transition);
+}
+
+.materia-card:hover::before { opacity: 1; }
+
+.materia-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-hover);
+    border-color: rgba(108, 92, 231, 0.1);
+}
+
+.materia-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    display: block;
+    transition: var(--transition);
+}
+
+.materia-card:hover .materia-icon {
+    transform: scale(1.15) rotate(-5deg);
+}
+
+.materia-card h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.materia-card p {
+    color: var(--text-light);
+    font-size: 0.85rem;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+}
+
+.materia-count {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.3rem 0.9rem;
+    border-radius: var(--radius-full);
+    background: rgba(108, 92, 231, 0.08);
+    color: var(--primary);
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.materia-header {
+    text-align: center;
+    padding: 2rem 0;
+}
+
+.materia-header h2 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.materia-header .materia-header-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.search-wrapper {
+    max-width: 520px;
+    margin: 0 auto 2rem;
+    position: relative;
+}

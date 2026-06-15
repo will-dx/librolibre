@@ -1,0 +1,149 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LibroLibre - Intercambio de Libros Universitarios</title>
+    <meta name="description" content="Plataforma donde estudiantes intercambian, prestan y donan libros universitarios. Únete a la comunidad.">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="nav-logo">
+                <div class="nav-logo-icon">📚</div>
+                LibroLibre
+            </a>
+            <button class="nav-toggle" aria-label="Menú"><span></span></button>
+            <ul class="nav-links">
+                <li><a href="#como-funciona">Cómo funciona</a></li>
+                <li><a href="#beneficios">Beneficios</a></li>
+                <li><a href="{% url 'login' %}">Iniciar Sesión</a></li>
+                <li><a href="{% url 'registro' %}" class="btn btn-primary btn-sm btn-pulse">Registrarse</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">✨ Comunidad estudiantil</div>
+            <h1>Comparte y encuentra<br>libros universitarios</h1>
+            <p>
+                La plataforma donde los estudiantes intercambian, prestan y donan libros.
+                Porque un libro que ya usaste puede ser el tesoro de otro estudiante.
+            </p>
+            <div class="hero-buttons">
+                <a href="{% url 'registro' %}" class="btn btn-primary btn-lg btn-pulse">📖 Comenzar ahora</a>
+                <a href="{% url 'login' %}" class="btn btn-outline btn-lg">Ya tengo cuenta</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- STATS -->
+    <section class="stats-section">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-number" data-count="0">0+</div>
+                <div class="stat-label">Estudiantes</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" data-count="0">0+</div>
+                <div class="stat-label">Libros compartidos</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" data-count="0">0+</div>
+                <div class="stat-label">Intercambios exitosos</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" data-count="0">0+</div>
+                <div class="stat-label">Universidades</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CÓMO FUNCIONA -->
+    <section id="como-funciona" class="how-it-works">
+        <h2 class="section-title reveal">¿Cómo funciona?</h2>
+        <p class="section-subtitle reveal">Tres pasos simples para compartir conocimiento</p>
+
+        <div class="steps-grid">
+            <div class="step-card reveal">
+                <div class="step-icon">📖</div>
+                <div class="step-number">1</div>
+                <h3>Publica un libro</h3>
+                <p>Sube un libro que ya hayas usado y que quieras regalar o prestar a otro estudiante.</p>
+            </div>
+            <div class="step-card reveal" style="animation-delay:0.15s;">
+                <div class="step-icon">🔍</div>
+                <div class="step-number">2</div>
+                <h3>Explora el catálogo</h3>
+                <p>Navega entre cientos de libros disponibles filtrados por materia, autor o disponibilidad.</p>
+            </div>
+            <div class="step-card reveal" style="animation-delay:0.3s;">
+                <div class="step-icon">🤝</div>
+                <div class="step-number">3</div>
+                <h3>Solicita y coordina</h3>
+                <p>Conéctate con el dueño del libro, coordinen la entrega y ¡a estudiar!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- BENEFICIOS -->
+    <section id="beneficios" style="padding:5rem 2rem; background:var(--bg);">
+        <h2 class="section-title reveal">¿Por qué LibroLibre?</h2>
+        <p class="section-subtitle reveal">Beneficios para toda la comunidad estudiantil</p>
+
+        <div class="features-grid">
+            <div class="feature-card reveal">
+                <div class="feature-icon feature-icon-purple">💰</div>
+                <h3>100% Gratuito</h3>
+                <p>Sin costos ocultos. Solo préstamos y donaciones entre estudiantes de confianza.</p>
+            </div>
+            <div class="feature-card reveal" style="animation-delay:0.1s;">
+                <div class="feature-icon feature-icon-teal">🌱</div>
+                <h3>Sostenible</h3>
+                <p>Dale una segunda vida a los libros. Reduce el desperdicio y el consumo innecesario.</p>
+            </div>
+            <div class="feature-card reveal" style="animation-delay:0.2s;">
+                <div class="feature-icon feature-icon-coral">🎓</div>
+                <h3>Comunidad Universitaria</h3>
+                <p>Solo estudiantes de tu universidad. Intercambia con gente de confianza.</p>
+            </div>
+            <div class="feature-card reveal" style="animation-delay:0.3s;">
+                <div class="feature-icon feature-icon-gold">📱</div>
+                <h3>Fácil de Usar</h3>
+                <p>Publica un libro en segundos. Encuentra lo que necesitas sin complicaciones.</p>
+            </div>
+            <div class="feature-card reveal" style="animation-delay:0.4s;">
+                <div class="feature-icon feature-icon-purple">🤗</div>
+                <h3>Apoyo Académico</h3>
+                <p>Ayuda a otros con los materiales que a ti te sirvieron. El conocimiento se comparte.</p>
+            </div>
+            <div class="feature-card reveal" style="animation-delay:0.5s;">
+                <div class="feature-icon feature-icon-teal">🔒</div>
+                <h3>Seguro y Confiable</h3>
+                <p>Usuarios verificados con correo institucional. Datos protegidos y privacidad garantizada.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section reveal">
+        <h2>Únete a la comunidad</h2>
+        <p>Miles de estudiantes ya están compartiendo libros. ¿Qué esperas?</p>
+        <a href="{% url 'registro' %}" class="btn btn-lg" style="background:white;color:var(--primary);">
+            Crear cuenta gratuita
+        </a>
+    </section>
+
+    <footer class="footer">
+        <p>© {% now "Y" %} LibroLibre — Comparte conocimiento, transforma vidas.</p>
+        <p style="margin-top:0.3rem; font-size:0.78rem;">Hecho con ❤️ para estudiantes universitarios</p>
+    </footer>
+
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>

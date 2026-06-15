@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Mi Perfil - LibroLibre{% endblock %}
+
+{% block content %}
+<div class="profile-header">
+    <div class="profile-header-content">
+        <div class="profile-avatar">👤</div>
+        <h1 class="profile-name">{{ user.nombre }}</h1>
+        <p class="profile-email">{{ user.email }}</p>
+    </div>
+</div>
+
+<div class="profile-stats">
+    <div class="profile-stat">
+        <div class="profile-stat-number" data-count="{{ mis_libros|length }}">{{ mis_libros|length }}</div>
+        <div class="profile-stat-label">Total publicados</div>
+    </div>
+    <div class="profile-stat">
+        <div class="profile-stat-number" data-count="{{ disponibles }}">{{ disponibles }}</div>
+        <div class="profile-stat-label">Disponibles</div>
+    </div>
+    <div class="profile-stat">
+        <div class="profile-stat-number" data-count="{{ prestados }}">{{ prestados }}</div>
+        <div class="profile-stat-label">Prestados</div>
+    </div>
+    <div class="profile-stat">
+        <div class="profile-stat-number" data-count="{{ donados }}">{{ donados }}</div>
+        <div class="profile-stat-label">Donados</div>
+    </div>
+</div>
+
+<div class="container">
+    <h2 class="section-title reveal">Mis Libros</h2>
+    <p class="section-subtitle reveal">Los libros que has compartido con la comunidad</p>
+
+    {% if mis_libros %}
+    <div style="display:flex; gap:0.75rem; justify-content:center; flex-wrap:wrap; margin-bottom:2rem;" class="reveal">
+        <a href="{% url 'publicar' %}" class="btn btn-accent btn-md btn-pulse-accent">📖 Publicar otro libro</a>
+        <a href="{% url 'ajustes_perfil' %}" class="btn btn-outline btn-md">⚙️ Ajustes</a>
+    </div>
+    {% endif %}
+
+    <div class="book-grid">
+        {% for libro in mis_libros %}
+        <div class="book-card reveal" data-status="{{ libro.estado|lower }}">
+            <div class="book-image">
+                {% if libro.foto %}
+                <img src="{{ libro.foto.url }}" alt="{{ libro.titulo }}">
+                {% else %}
+                📕
+                {% endif %}
+                <div class="book-image-overlay"></div>
+            </div>
+            <div class="book-info">
+                <h3 class="book-title">{{ libro.titulo }}</h3>
+                <p class="book-author">✍️ {{ libro.autor|default:"Autor desconocido" }}</p>
+                <div class="book-meta">
+                    <span class="book-status status-{{ libro.estado|lower }}">
+                        {{ libro.get_estado_display|default:libro.estado }}
+                    </span>
+                    <a href="{% url 'eliminar_libro' libro.id %}"
+                       class="btn btn-sm btn-outline-accent"
+                       onclick="return confirm('¿Estás seguro de eliminar "{{ libro.titulo }}"?')">
+                        🗑 Eliminar
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="empty-state book-grid-empty reveal">
+            <div class="empty-state-icon">📭</div>
+            <h3>Aún no has publicado libros</h3>
+            <p>Comparte tus libros con la comunidad universitaria.</p>
+            <a href="{% url 'publicar' %}" class="btn btn-primary">📖 Publicar mi primer libro</a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

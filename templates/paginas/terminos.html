@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Términos y Condiciones - LibroLibre{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/paginas.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="hero hero-mini">
+    <div class="hero-content">
+        <div class="hero-badge">📋 Términos</div>
+        <h1>Términos y Condiciones</h1>
+        <p>Al usar LibroLibre aceptas los siguientes términos.</p>
+    </div>
+</section>
+
+<div class="container terminos-content reveal">
+    <p class="ultima-act">Última actualización: Junio 2026</p>
+
+    <h3>1. Aceptación de los términos</h3>
+    <p>Al acceder y utilizar LibroLibre, aceptas cumplir con estos términos y condiciones.
+    Si no estás de acuerdo con alguna parte, no debes usar la plataforma.</p>
+
+    <h3>2. Descripción del servicio</h3>
+    <p>LibroLibre es una plataforma que facilita el intercambio, préstamo y donación de libros
+    entre estudiantes universitarios. Actuamos únicamente como intermediarios; no somos parte
+    de las transacciones entre usuarios.</p>
+
+    <h3>3. Elegibilidad</h3>
+    <p>Para usar LibroLibre debes:</p>
+    <ul>
+        <li>Ser estudiante universitario activo</li>
+        <li>Contar con un correo institucional válido</li>
+        <li>Tener al menos 16 años de edad</li>
+        <li>Registrarte con información veraz y actualizada</li>
+    </ul>
+
+    <h3>4. Responsabilidades del usuario</h3>
+    <p>Como usuario te comprometes a:</p>
+    <ul>
+        <li>No publicar contenido falso o engañoso</li>
+        <li>No utilizar la plataforma para fines comerciales</li>
+        <li>Respetar a los demás miembros de la comunidad</li>
+        <li>Mantener la confidencialidad de tu contraseña</li>
+        <li>Cumplir con los acuerdos de préstamo o donación que establezcas</li>
+    </ul>
+
+    <h3>5. Propiedad intelectual</h3>
+    <p>Los libros publicados son propiedad de sus respectivos dueños. LibroLibre no reclama
+    derechos de propiedad sobre los materiales compartidos en la plataforma.</p>
+
+    <h3>6. Privacidad</h3>
+    <p>Tu privacidad es importante para nosotros. Solo compartimos tu información de contacto
+    con usuarios que soliciten un libro que hayas publicado. No vendemos ni compartimos tus
+    datos con terceros.</p>
+
+    <h3>7. Limitación de responsabilidad</h3>
+    <p>LibroLibre no se hace responsable por:</p>
+    <ul>
+        <li>La veracidad de la información publicada por los usuarios</li>
+        <li>El estado o calidad de los libros intercambiados</li>
+        <li>Acuerdos no cumplidos entre usuarios</li>
+        <li>Daños o pérdidas derivados del uso de la plataforma</li>
+    </ul>
+
+    <h3>8. Modificaciones</h3>
+    <p>Nos reservamos el derecho de modificar estos términos en cualquier momento.
+    Los cambios entrarán en vigor inmediatamente después de su publicación en la plataforma.</p>
+
+    <h3>9. Contacto</h3>
+    <p>Si tienes preguntas sobre estos términos, contáctanos a través de nuestro
+    <a href="{% url 'pagina_contacto' %}" style="color:var(--primary);font-weight:600;">formulario de contacto</a>.</p>
+</div>
+{% endblock %}

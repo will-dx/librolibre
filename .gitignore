@@ -1,0 +1,37 @@
+# Entorno virtual
+.venv/
+venv/
+env/
+
+# Bytecode
+__pycache__/
+*.pyc
+*.pyo
+
+# Base de datos local
+db.sqlite3
+*.sqlite3
+
+# Archivos estáticos compilados
+staticfiles/
+
+# Archivos multimedia subidos por usuarios
+media/
+
+# Variables de entorno
+.env
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+server_err.txt
+server_out.txt

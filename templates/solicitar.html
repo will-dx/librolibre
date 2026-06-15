@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Solicitar - {{ libro.titulo }} - LibroLibre{% endblock %}
+
+{% block content %}
+<section class="hero hero-mini">
+    <div class="hero-content">
+        <div class="hero-badge">📩 Solicitar libro</div>
+        <h1>Contacta al propietario</h1>
+        <p>Coordina con tu compañero la entrega o préstamo del libro.</p>
+    </div>
+</section>
+
+<div class="container-sm">
+    <div class="form-card">
+        <div style="text-align:center;margin-bottom:2rem;">
+            {% if libro.foto %}
+            <img src="{{ libro.foto.url }}" alt="{{ libro.titulo }}"
+                 style="max-height:250px;border-radius:var(--radius);object-fit:cover;margin-bottom:1rem;width:100%;max-width:300px;">
+            {% else %}
+            <div style="font-size:5rem;margin-bottom:1rem;">📕</div>
+            {% endif %}
+            <h2>{{ libro.titulo }}</h2>
+            <p style="color:var(--text-light);">✍️ {{ libro.autor|default:"Autor desconocido" }}</p>
+            <span class="book-status status-{{ libro.estado|lower }}" style="margin-top:0.5rem;">
+                {{ libro.get_estado_display }}
+            </span>
+        </div>
+
+        <div style="background:var(--bg);border-radius:var(--radius);padding:2rem;margin-bottom:2rem;text-align:center;">
+            <div style="font-size:3rem;margin-bottom:0.5rem;">👤</div>
+            <h3 style="margin-bottom:0.25rem;">{{ dueno.nombre }}</h3>
+            <p style="color:var(--text-light);font-size:0.95rem;">
+                <a href="mailto:{{ dueno.email }}" style="color:var(--primary);font-weight:600;">
+                    {{ dueno.email }}
+                </a>
+            </p>
+            <p style="color:var(--text-lighter);font-size:0.82rem;margin-top:0.5rem;">
+                Envía un correo para coordinar la entrega del libro.
+            </p>
+        </div>
+
+        <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+            <a href="mailto:{{ dueno.email }}" class="btn btn-primary btn-lg">
+                ✉️ Enviar correo
+            </a>
+            <a href="{% url 'catalogo' %}" class="btn btn-outline btn-lg">
+                Volver al catálogo
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}
